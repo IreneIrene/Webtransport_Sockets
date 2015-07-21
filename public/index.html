@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="chatApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="chat-wrap" ng-controller="ChatCtrl as vm">
+    <div id="chat-header">
+        <span>Live Chat Online</span>
+    </div>
+    <ul id="messages">
+        <li ng-repeat="msg in vm.messages track by $index" ng-cloak>
+            <b>{{msg.name}}:</b>
+            {{msg.text}}
+        </li>
+    </ul>
+    <input type="text" id="name-input" placeholder="Your name" ng-model="vm.name">
+    <textarea id="msg-input" placeholder="Type message" ng-model="vm.text" ng-class="{'has-error': vm.error}" ng-keyup="vm.error=false">
+    </textarea>
+    <a href="#" id="send-msg-btn" ng-click="vm.sendMsg()">Send</a>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>
+<script src="main.js"></script>
+<script src="socket-service.js"></script>
+<script src="route-config.js"></script>
+</body>
+</html>
